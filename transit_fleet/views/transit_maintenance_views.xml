@@ -48,6 +48,23 @@ groups="transit_base.group_fleet_manager,transit_base.group_safety_officer"/>
                         <page string="Notes" name="notes">
                             <field name="note" placeholder="Additional notes..."/>
                         </page>
+                        <page string="Previous Maintenance History" name="previous_maintenance_history">
+                            <field name="previous_maintenance_ids" readonly="1">
+                                <list>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                    <field name="name"/>
+                                    <field name="maintenance_type"/>
+                                    <field name="mechanic"/>
+                                    <field name="cost"/>
+                                    <field name="state" widget="badge"
+                                           decoration-success="state == 'done'"
+                                           decoration-info="state == 'in_progress'"
+                                           decoration-danger="state == 'cancelled'"
+                                           decoration-muted="state == 'draft'"/>
+                                </list>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
                 <chatter/>

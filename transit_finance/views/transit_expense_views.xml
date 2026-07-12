@@ -25,8 +25,8 @@
                     </div>
                     <group>
                         <group string="Expense Details">
-                            <field name="vehicle_id"/>
                             <field name="trip_id"/>
+                            <field name="vehicle_id"/>
                             <field name="expense_type"/>
                             <field name="amount"/>
                             <field name="date"/>
@@ -45,9 +45,41 @@
                             <field name="approval_date"/>
                         </group>
                     </group>
-                    <separator string="Notes"/>
-                    <field name="note" placeholder="Additional notes..."/>
+                    <group string="Trip Cost Context">
+                        <group>
+                            <field name="trip_fuel_cost" readonly="1"/>
+                            <field name="trip_existing_expense_total" readonly="1"/>
+                            <field name="trip_operational_cost_estimate" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="auto_calculated_amount" readonly="1"/>
+                            <field name="amount_variance" readonly="1"/>
+                            <field name="comparison_expense_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Similar Expense History" name="similar_expense_history">
+                            <field name="similar_expense_ids" readonly="1">
+                                <list>
+                                    <field name="date"/>
+                                    <field name="trip_id"/>
+                                    <field name="vehicle_id"/>
+                                    <field name="expense_type"/>
+                                    <field name="amount"/>
+                                    <field name="payment_method"/>
+                                    <field name="state" widget="badge"
+                                           decoration-success="state == 'approved'"
+                                           decoration-danger="state == 'rejected'"
+                                           decoration-info="state == 'draft'"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="note" placeholder="Additional notes..."/>
+                        </page>
+                    </notebook>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>

@@ -47,14 +47,36 @@
                         <group>
                             <field name="source"/>
                             <field name="destination"/>
-                            <field name="source_latitude" invisible="1"/>
-                            <field name="source_longitude" invisible="1"/>
+                            <div class="d-flex align-items-center gap-2">
+                                <button name="action_fetch_route_distance" string=""
+                                        title="Fetch Coordinates and Distance"
+                                        type="object" icon="fa-refresh" class="btn-secondary"
+                                        invisible="not source or not destination"/>
+                                <button name="action_open_route_map" string=""
+                                        title="Open Route Map"
+                                        type="object" icon="fa-map-marker" class="btn-secondary"
+                                        invisible="not source or not destination"/>
+                                <span class="text-muted">Map Distance</span>
+                                <field name="map_distance_km" nolabel="1" readonly="1" class="oe_inline"/>
+                            </div>
                         </group>
                         <group>
                             <field name="vehicle_id"/>
                             <field name="driver_id"/>
                             <field name="cargo_weight"/>
                             <field name="planned_distance"/>
+                        </group>
+                    </group>
+                    <group string="Smart Dispatch Readiness">
+                        <group>
+                            <field name="dispatch_readiness_score" readonly="1"/>
+                            <field name="dispatch_decision" widget="badge" readonly="1"
+                                   decoration-success="dispatch_decision == 'ready'"
+                                   decoration-warning="dispatch_decision == 'warning'"
+                                   decoration-danger="dispatch_decision == 'blocked'"/>
+                        </group>
+                        <group>
+                            <field name="dispatch_warning" readonly="1" nolabel="1"/>
                         </group>
                     </group>
                     <notebook>
@@ -70,8 +92,16 @@
                                 <group string="Dates &amp; Location">
                                     <field name="dispatch_date"/>
                                     <field name="completion_date"/>
-                                    <field name="destination_latitude" invisible="1"/>
-                                    <field name="destination_longitude" invisible="1"/>
+                                </group>
+                            </group>
+                            <group string="Route Coordinates">
+                                <group string="Source">
+                                    <field name="source_latitude" readonly="1"/>
+                                    <field name="source_longitude" readonly="1"/>
+                                </group>
+                                <group string="Destination">
+                                    <field name="destination_latitude" readonly="1"/>
+                                    <field name="destination_longitude" readonly="1"/>
                                 </group>
                             </group>
                             <group string="Metrics">
@@ -79,6 +109,7 @@
                                     <field name="fuel_efficiency" readonly="1"/>
                                     <field name="duration_hours" readonly="1"/>
                                     <field name="operational_cost" readonly="1"/>
+                                    <field name="map_distance_source" readonly="1"/>
                                 </group>
                             </group>
                         </page>
