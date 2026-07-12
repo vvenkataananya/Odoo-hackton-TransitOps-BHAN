@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_transit_fleet"
+              name="Fleet"
+              parent="transit_base.menu_transit_root"
+              sequence="20"/>
+
+    <menuitem id="menu_transit_fleet_vehicles"
+              name="Vehicles"
+              parent="menu_transit_fleet"
+              action="action_transit_vehicle"
+              sequence="10"/>
+
+    <menuitem id="menu_transit_fleet_maintenance"
+              name="Maintenance"
+              parent="menu_transit_fleet"
+              action="action_transit_maintenance"
+              sequence="20"/>
+</odoo>
