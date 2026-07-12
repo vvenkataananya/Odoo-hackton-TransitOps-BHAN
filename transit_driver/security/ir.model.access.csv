@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_transit_driver_user,transit.driver.user,model_transit_driver,base.group_user,1,0,0,0
+access_transit_driver_manager,transit.driver.manager,model_transit_driver,,1,1,1,1

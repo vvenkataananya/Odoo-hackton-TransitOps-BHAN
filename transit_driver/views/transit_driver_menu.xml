@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="menu_transit_drivers"
+        name="Drivers"
+        parent="transit_base.menu_transit_root"
+        action="action_transit_driver"
+        sequence="20"
+    />
+
+</odoo>
