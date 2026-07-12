@@ -6,17 +6,35 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_trips" type="object" class="oe_stat_button"
+                                icon="fa-road" invisible="total_trips == 0">
+                            <field name="total_trips" widget="statinfo" string="Total Trips"/>
+                        </button>
+                        <button name="action_view_trips" type="object" class="oe_stat_button"
+                                icon="fa-check-circle" invisible="completed_trips == 0">
+                            <field name="completed_trips" widget="statinfo" string="Completed"/>
+                        </button>
+                    </div>
+                    <field name="profile_photo" widget="image" class="oe_avatar"
+                           options="{'preview_image': 'avatar_128'}"/>
                     <div class="oe_title">
                         <label for="name"/>
                         <h1>
                             <field name="name" placeholder="Driver Name"/>
                         </h1>
+                        <field name="license_status" widget="badge"
+                               decoration-success="license_status == 'valid'"
+                               decoration-danger="license_status == 'expired'"
+                               decoration-warning="license_status == 'expiring_soon'"
+                               invisible="not license_status"/>
                     </div>
                     <group>
                         <group string="License Information">
                             <field name="license_number"/>
                             <field name="license_category_id"/>
                             <field name="license_expiry_date"/>
+                            <field name="days_until_expiry" readonly="1"/>
                         </group>
                         <group string="Contact">
                             <field name="contact_number"/>
@@ -30,7 +48,7 @@
                             <field name="address"/>
                         </group>
                         <group string="Employment">
-                            <field name="safety_score"/>
+                            <field name="safety_score" widget="progressbar"/>
                             <field name="status"/>
                             <field name="active"/>
                             <field name="company_id" groups="base.group_multi_company"/>
@@ -42,6 +60,7 @@
                         </page>
                     </notebook>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -50,13 +69,24 @@
         <field name="name">transit.driver.tree</field>
         <field name="model">transit.driver</field>
         <field name="arch" type="xml">
-            <list>
+            <list decoration-success="status == 'available'"
+                  decoration-info="status == 'on_trip'"
+                  decoration-warning="status == 'off_duty'"
+                  decoration-danger="status == 'suspended'">
                 <field name="name"/>
                 <field name="license_number"/>
                 <field name="license_category_id"/>
                 <field name="license_expiry_date"/>
-                <field name="safety_score"/>
-                <field name="status" widget="badge"/>
+                <field name="license_status" widget="badge"
+                       decoration-success="license_status == 'valid'"
+                       decoration-danger="license_status == 'expired'"
+                       decoration-warning="license_status == 'expiring_soon'"/>
+                <field name="safety_score" widget="progressbar"/>
+                <field name="status" widget="badge"
+                       decoration-success="status == 'available'"
+                       decoration-info="status == 'on_trip'"
+                       decoration-warning="status == 'off_duty'"
+                       decoration-danger="status == 'suspended'"/>
             </list>
         </field>
     </record>
@@ -77,11 +107,19 @@
                         domain="[('status', '=', 'off_duty')]"/>
                 <filter name="filter_suspended" string="Suspended"
                         domain="[('status', '=', 'suspended')]"/>
+                <separator/>
+                <filter name="filter_license_expired" string="License Expired"
+                        domain="[('is_license_expired', '=', True)]"/>
+                <filter name="filter_license_expiring" string="License Expiring Soon"
+                        domain="[('license_status', '=', 'expiring_soon')]"/>
+                <separator/>
                 <group>
                     <filter name="group_status" string="Status"
                             context="{'group_by': 'status'}"/>
                     <filter name="group_license_category" string="License Category"
                             context="{'group_by': 'license_category_id'}"/>
+                    <filter name="group_license_status" string="License Status"
+                            context="{'group_by': 'license_status'}"/>
                 </group>
             </search>
         </field>

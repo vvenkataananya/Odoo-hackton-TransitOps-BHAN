@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="transit_dashboard_view_form" model="ir.ui.view">
+        <field name="name">transit.dashboard.form</field>
+        <field name="model">transit.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="Dashboard" create="false" edit="false" class="transitops-dashboard">
+                <sheet>
+                    <div class="to-dashboard">
+
+                        <!-- ════════ HERO: 4 Big Numbers ════════ -->
+                        <div class="to-hero">
+                            <div class="to-hero-item">
+                                <div class="to-hero-number"><field name="total_vehicles" readonly="1"/></div>
+                                <div class="to-hero-label">Total Fleet</div>
+                                <div class="to-hero-sub"><field name="available_vehicles" readonly="1"/> available now</div>
+                            </div>
+                            <div class="to-hero-item">
+                                <div class="to-hero-number"><field name="active_trips" readonly="1"/></div>
+                                <div class="to-hero-label">Active Trips</div>
+                                <div class="to-hero-sub"><field name="fleet_utilization" readonly="1" digits="[5,1]"/>% utilization</div>
+                            </div>
+                            <div class="to-hero-item">
+                                <div class="to-hero-number"><field name="total_drivers" readonly="1"/></div>
+                                <div class="to-hero-label">Total Drivers</div>
+                                <div class="to-hero-sub"><field name="drivers_on_duty" readonly="1"/> on duty</div>
+                            </div>
+                            <div class="to-hero-item">
+                                <div class="to-hero-number"><field name="total_operating_cost" readonly="1"/></div>
+                                <div class="to-hero-label">Operating Cost</div>
+                                <div class="to-hero-sub">this month</div>
+                            </div>
+                        </div>
+
+                        <!-- ════════ STAT PILLS: Horizontal counters ════════ -->
+                        <div class="to-stats-row">
+                            <div class="to-stat-pill">
+                                <div class="to-stat-dot c2"></div>
+                                <span class="to-stat-text">Pending</span>
+                                <span class="to-stat-val"><field name="pending_trips" readonly="1"/></span>
+                            </div>
+                            <div class="to-stat-pill">
+                                <div class="to-stat-dot c3"></div>
+                                <span class="to-stat-text">Completed</span>
+                                <span class="to-stat-val"><field name="completed_trips" readonly="1"/></span>
+                            </div>
+                            <div class="to-stat-pill">
+                                <div class="to-stat-dot c1"></div>
+                                <span class="to-stat-text">Completion</span>
+                                <span class="to-stat-val"><field name="trip_completion_rate" readonly="1" digits="[5,1]"/>%</span>
+                            </div>
+                            <div class="to-stat-pill">
+                                <div class="to-stat-dot c4"></div>
+                                <span class="to-stat-text">In Maintenance</span>
+                                <span class="to-stat-val"><field name="vehicles_in_maintenance" readonly="1"/></span>
+                            </div>
+                            <div class="to-stat-pill">
+                                <div class="to-stat-dot c5"></div>
+                                <span class="to-stat-text">Safety Score</span>
+                                <span class="to-stat-val"><field name="avg_safety_score" readonly="1" digits="[4,1]"/></span>
+                            </div>
+                            <div class="to-stat-pill">
+                                <div class="to-stat-dot c6"></div>
+                                <span class="to-stat-text">Fuel Efficiency</span>
+                                <span class="to-stat-val"><field name="avg_fuel_efficiency" readonly="1" digits="[5,1]"/> km/L</span>
+                            </div>
+                        </div>
+
+                        <!-- ════════ FINANCE BANNER ════════ -->
+                        <div class="to-finance-banner">
+                            <div class="to-finance-item">
+                                <div class="to-finance-label">Fuel Cost</div>
+                                <div class="to-finance-val"><field name="total_fuel_cost_month" readonly="1"/></div>
+                            </div>
+                            <div class="to-finance-item">
+                                <div class="to-finance-label">Expenses</div>
+                                <div class="to-finance-val"><field name="total_expenses_month" readonly="1"/></div>
+                            </div>
+                            <div class="to-finance-item">
+                                <div class="to-finance-label">Maintenance</div>
+                                <div class="to-finance-val"><field name="total_maintenance_cost_month" readonly="1"/></div>
+                            </div>
+                        </div>
+
+                        <!-- ════════ SECTION: Live Operations ════════ -->
+                        <div class="to-section-header">
+                            <div class="to-section-line"></div>
+                            <div class="to-section-label">Live Operations</div>
+                            <div class="to-section-line"></div>
+                        </div>
+
+                        <!-- ════════ MAIN: Trips + Fleet Status ════════ -->
+                        <div class="to-content-grid">
+
+                            <!-- Recent Trips Table -->
+                            <div class="to-panel">
+                                <div class="to-panel-title">
+                                    <div class="to-panel-title-dot"></div>
+                                    Recent Trips
+                                </div>
+                                <field name="recent_trip_ids" readonly="1" nolabel="1">
+                                    <list create="false" delete="false" default_order="id desc" decoration-danger="state == 'cancelled'" decoration-success="state == 'completed'" decoration-info="state == 'dispatched'" decoration-muted="state == 'draft'">
+                                        <field name="name" string="Trip"/>
+                                        <field name="vehicle_id" string="Vehicle"/>
+                                        <field name="driver_id" string="Driver"/>
+                                        <field name="source" string="From"/>
+                                        <field name="destination" string="To"/>
+                                        <field name="state" string="Status"/>
+                                    </list>
+                                </field>
+                            </div>
+
+                            <!-- Fleet Status Bars -->
+                            <div class="to-panel">
+                                <div class="to-panel-title">
+                                    <div class="to-panel-title-dot" style="background:#34d399;"></div>
+                                    Fleet Status
+                                </div>
+                                <div class="to-fleet-bars">
+                                    <div class="to-bar-item">
+                                        <div class="to-bar-header">
+                                            <span class="to-bar-label"><span class="to-bar-dot available"></span>Available</span>
+                                            <span class="to-bar-count"><field name="available_vehicles" readonly="1"/></span>
+                                        </div>
+                                        <field name="pct_available" widget="progressbar"/>
+                                    </div>
+                                    <div class="to-bar-item">
+                                        <div class="to-bar-header">
+                                            <span class="to-bar-label"><span class="to-bar-dot ontrip"></span>On Trip</span>
+                                            <span class="to-bar-count"><field name="vehicles_on_trip" readonly="1"/></span>
+                                        </div>
+                                        <field name="pct_on_trip" widget="progressbar"/>
+                                    </div>
+                                    <div class="to-bar-item">
+                                        <div class="to-bar-header">
+                                            <span class="to-bar-label"><span class="to-bar-dot maintenance"></span>Maintenance</span>
+                                            <span class="to-bar-count"><field name="vehicles_in_maintenance" readonly="1"/></span>
+                                        </div>
+                                        <field name="pct_in_maintenance" widget="progressbar"/>
+                                    </div>
+                                    <div class="to-bar-item">
+                                        <div class="to-bar-header">
+                                            <span class="to-bar-label"><span class="to-bar-dot retired"></span>Retired</span>
+                                            <span class="to-bar-count"><field name="vehicles_retired" readonly="1"/></span>
+                                        </div>
+                                        <field name="pct_retired" widget="progressbar"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- ════════ BOTTOM: 3 detail panels ════════ -->
+                        <div class="to-bottom-grid">
+                            <div class="to-panel">
+                                <div class="to-panel-title">
+                                    <div class="to-panel-title-dot" style="background:#fbbf24;"></div>
+                                    Operations
+                                </div>
+                                <div class="to-metric-row">
+                                    <span class="to-metric-name">Distance This Month</span>
+                                    <span class="to-metric-val"><field name="total_distance_month" readonly="1"/> km</span>
+                                </div>
+                                <div class="to-metric-row">
+                                    <span class="to-metric-name">Cargo Delivered</span>
+                                    <span class="to-metric-val"><field name="total_cargo_month" readonly="1"/> kg</span>
+                                </div>
+                                <div class="to-metric-row">
+                                    <span class="to-metric-name">Revenue This Month</span>
+                                    <span class="to-metric-val"><field name="total_revenue_month" readonly="1"/></span>
+                                </div>
+                            </div>
+                            <div class="to-panel">
+                                <div class="to-panel-title">
+                                    <div class="to-panel-title-dot" style="background:#f87171;"></div>
+                                    Alerts
+                                </div>
+                                <div class="to-metric-row">
+                                    <span class="to-metric-name">Expired Licenses</span>
+                                    <span class="to-metric-val" style="color:#f87171;"><field name="expired_licenses" readonly="1"/></span>
+                                </div>
+                                <div class="to-metric-row">
+                                    <span class="to-metric-name">Expiring Soon</span>
+                                    <span class="to-metric-val" style="color:#fbbf24;"><field name="expiring_licenses" readonly="1"/></span>
+                                </div>
+                                <div class="to-metric-row">
+                                    <span class="to-metric-name">Pending Expenses</span>
+                                    <span class="to-metric-val"><field name="pending_expenses" readonly="1"/></span>
+                                </div>
+                            </div>
+                            <div class="to-panel">
+                                <div class="to-panel-title">
+                                    <div class="to-panel-title-dot" style="background:#c084fc;"></div>
+                                    Drivers
+                                </div>
+                                <div class="to-metric-row">
+                                    <span class="to-metric-name">Available Drivers</span>
+                                    <span class="to-metric-val"><field name="available_drivers" readonly="1"/></span>
+                                </div>
+                                <div class="to-metric-row">
+                                    <span class="to-metric-name">Suspended</span>
+                                    <span class="to-metric-val" style="color:#f87171;"><field name="drivers_suspended" readonly="1"/></span>
+                                </div>
+                                <div class="to-metric-row">
+                                    <span class="to-metric-name">Safety Score</span>
+                                    <span class="to-metric-val" style="color:#34d399;"><field name="avg_safety_score" readonly="1" digits="[4,1]"/></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="transit_dashboard_action" model="ir.actions.act_window">
+        <field name="name">Dashboard</field>
+        <field name="res_model">transit.dashboard</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+    </record>
+</odoo>
