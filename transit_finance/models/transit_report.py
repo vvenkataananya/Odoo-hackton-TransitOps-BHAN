@@ -30,6 +30,11 @@ class TransitReport(models.TransientModel):
     ], default='summary', required=True)
     result_line_ids = fields.One2many('transit.report.line', 'report_id', string="Results")
 
+    @api.onchange('vehicle_id')
+    def _onchange_vehicle_id(self):
+        if self.vehicle_id:
+            self.vehicle_type_id = self.vehicle_id.vehicle_type_id
+
     def _get_vehicle_domain(self):
         domain = [('date', '>=', self.date_from), ('date', '<=', self.date_to)]
         if self.vehicle_id:
@@ -108,7 +113,7 @@ class TransitReport(models.TransientModel):
             lines.append((0, 0, {
                 'metric': 'Fuel Efficiency',
                 'label': vehicle.registration_number,
-                'value': '%.2f km/L' % efficiency,
+                'value': '%.1f km/L' % efficiency,
                 'vehicle_id': vehicle.id,
                 'vehicle_name': vehicle.vehicle_name,
             }))
@@ -116,7 +121,7 @@ class TransitReport(models.TransientModel):
         lines.append((0, 0, {
             'metric': 'OVERALL',
             'label': 'Fleet Average',
-            'value': '%.2f km/L' % overall,
+            'value': '%.1f km/L (Overall Avg)' % overall,
         }))
         return lines
 
@@ -141,7 +146,7 @@ class TransitReport(models.TransientModel):
             lines.append((0, 0, {
                 'metric': 'Fleet Utilization',
                 'label': vehicle.registration_number,
-                'value': '%.1f%%' % min(utilization, 100),
+                'value': '%.1f%% (%d days active of %d)' % (min(utilization, 100), trip_days, date_range),
                 'vehicle_id': vehicle.id,
                 'vehicle_name': vehicle.vehicle_name,
             }))
@@ -169,7 +174,7 @@ class TransitReport(models.TransientModel):
             lines.append((0, 0, {
                 'metric': 'Operational Cost',
                 'label': vehicle.registration_number,
-                'value': '$%.2f (Fuel: $%.2f + Expenses: $%.2f)' % (total, fuel_cost, expense_cost),
+                'value': '{:,.0f} (Fuel: {:,.0f} + Expenses: {:,.0f})'.format(total, fuel_cost, expense_cost),
                 'vehicle_id': vehicle.id,
                 'vehicle_name': vehicle.vehicle_name,
             }))
@@ -207,7 +212,7 @@ class TransitReport(models.TransientModel):
             lines.append((0, 0, {
                 'metric': 'Vehicle ROI',
                 'label': vehicle.registration_number,
-                'value': '%.1f%% (Revenue: $%.2f, Costs: $%.2f)' % (roi, revenue, total_cost),
+                'value': '{:.1f}% ROI (Est. Revenue: {:,.0f}, Total Cost: {:,.0f})'.format(roi, revenue, total_cost),
                 'vehicle_id': vehicle.id,
                 'vehicle_name': vehicle.vehicle_name,
             }))
@@ -230,7 +235,7 @@ class TransitReport(models.TransientModel):
             lines.append((0, 0, {
                 'metric': 'Maintenance Cost',
                 'label': vehicle.registration_number,
-                'value': '$%.2f (%d records, avg $%.2f)' % (total_cost, count, avg),
+                'value': '{:,.0f} ({} repairs, avg {:,.0f})'.format(total_cost, count, avg),
                 'vehicle_id': vehicle.id,
                 'vehicle_name': vehicle.vehicle_name,
             }))
@@ -252,7 +257,7 @@ class TransitReport(models.TransientModel):
             lines.append((0, 0, {
                 'metric': 'Driver Performance',
                 'label': driver.name,
-                'value': '%d trips, avg %.1f km, Safety: %.0f' % (completed, avg_distance, driver.safety_score),
+                'value': '{}% Safety ({} trips completed, avg {:.1f} km)'.format(driver.safety_score, completed, avg_distance),
             }))
         return lines
 
