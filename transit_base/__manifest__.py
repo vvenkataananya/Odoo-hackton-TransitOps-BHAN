@@ -1,0 +1,21 @@
+{
+    'name': 'Transit Base',
+    'version': '19.0.1.0.0',
+    'category': 'Transport',
+    'summary': 'Base settings and master data for TransitOps',
+    'description': 'Vehicle types, license categories, and RBAC groups',
+    'author': 'TransitOps',
+    'depends': ['base', 'mail', 'base_setup'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/transit_vehicle_type_views.xml',
+        'views/transit_license_category_views.xml',
+        'views/res_config_settings_views.xml',
+        'views/transit_base_menu.xml',
+        'data/vehicle_type_data.xml',
+        'data/license_category_data.xml',
+    ],
+    'installable': True,
+    'application': False,
+    'license': 'LGPL-3',
+}

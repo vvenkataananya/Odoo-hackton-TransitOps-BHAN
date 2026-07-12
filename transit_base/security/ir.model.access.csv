@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_transit_vehicle_type_user,transit.vehicle.type.user,model_transit_vehicle_type,base.group_user,1,0,0,0
+access_transit_vehicle_type_manager,transit.vehicle.type.manager,model_transit_vehicle_type,,1,1,1,1
+access_transit_license_category_user,transit.license.category.user,model_transit_license_category,base.group_user,1,0,0,0
+access_transit_license_category_manager,transit.license.category.manager,model_transit_license_category,,1,1,1,1
+access_res_config_settings_user,res.config.settings.user,model_res_config_settings,base.group_system,1,1,1,1
