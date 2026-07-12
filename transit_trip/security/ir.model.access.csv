@@ -1,5 +1,9 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_transit_trip_user,transit.trip.user,model_transit_trip,base.group_user,1,0,0,0
-access_transit_trip_manager,transit.trip.manager,model_transit_trip,,1,1,1,1
-access_transit_fuel_log_user,transit.fuel.log.user,model_transit_fuel_log,base.group_user,1,0,0,0
-access_transit_fuel_log_manager,transit.fuel.log.manager,model_transit_fuel_log,,1,1,1,1
+access_transit_trip_fleet_manager,transit.trip.fleet_manager,model_transit_trip,transit_base.group_fleet_manager,1,1,1,1
+access_transit_trip_driver,transit.trip.driver,model_transit_trip,transit_base.group_driver,1,1,1,0
+access_transit_trip_safety_officer,transit.trip.safety_officer,model_transit_trip,transit_base.group_safety_officer,1,0,0,0
+access_transit_trip_financial,transit.trip.financial,model_transit_trip,transit_base.group_financial_analyst,1,0,0,0
+access_transit_fuel_log_fleet_manager,transit.fuel.log.fleet_manager,model_transit_fuel_log,transit_base.group_fleet_manager,1,1,1,1
+access_transit_fuel_log_driver,transit.fuel.log.driver,model_transit_fuel_log,transit_base.group_driver,1,1,1,0
+access_transit_fuel_log_safety_officer,transit.fuel.log.safety_officer,model_transit_fuel_log,transit_base.group_safety_officer,1,0,0,0
+access_transit_fuel_log_financial,transit.fuel.log.financial,model_transit_fuel_log,transit_base.group_financial_analyst,1,0,0,0

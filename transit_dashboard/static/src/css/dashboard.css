@@ -1,0 +1,487 @@
+/* ═══════════════════════════════════════════════════════════════
+   TransitOps Dashboard – Premium Design
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Base ──────────────────────────────────────────────────── */
+.transitops-dashboard .o_form_sheet,
+.transitops-dashboard .o_sheet,
+.transitops-dashboard .o_content {
+    background: #0b0f1a !important;
+    color: #d0d8e8 !important;
+    min-height: 100vh;
+    border: none !important;
+    box-shadow: none !important;
+}
+.transitops-dashboard .oe_sheet { background: transparent !important; }
+.transitops-dashboard .o_form_label { display: none !important; }
+.transitops-dashboard .o_field_widget { background: transparent !important; border: none !important; }
+
+.to-dashboard {
+    padding: 20px 24px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ── Filter bar ────────────────────────────────────────────── */
+.to-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(139,92,246,0.06));
+    border: 1px solid rgba(139,92,246,0.15);
+    border-radius: 12px;
+    padding: 10px 16px;
+}
+.to-filter-label {
+    font-weight: 700; font-size: 10px; color: #6366f1;
+    text-transform: uppercase; letter-spacing: 1.5px;
+}
+.to-filter-select {
+    background: rgba(255,255,255,0.05); color: #c8d6e5;
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+    padding: 7px 12px; font-size: 12px; outline: none;
+    transition: all 0.2s;
+}
+.to-filter-select:hover { border-color: #6366f1; }
+.to-filter-select option { background: #1a1f35; color: #c8d6e5; }
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO SECTION – Big numbers, not boxes
+   ═══════════════════════════════════════════════════════════════ */
+.to-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.to-hero-item {
+    padding: 28px 24px;
+    text-align: center;
+    position: relative;
+    transition: background 0.3s;
+}
+
+.to-hero-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 20%; height: 60%;
+    width: 1px;
+    background: rgba(255,255,255,0.06);
+}
+
+.to-hero-item:hover {
+    background: rgba(255,255,255,0.03);
+}
+
+.to-hero-number {
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -1px;
+    margin-bottom: 6px;
+}
+
+.to-hero-item:nth-child(1) .to-hero-number { color: #818cf8; }
+.to-hero-item:nth-child(2) .to-hero-number { color: #34d399; }
+.to-hero-item:nth-child(3) .to-hero-number { color: #fbbf24; }
+.to-hero-item:nth-child(4) .to-hero-number { color: #f87171; }
+
+.to-hero-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #5a6480;
+}
+
+.to-hero-sub {
+    font-size: 11px;
+    color: #475569;
+    margin-top: 4px;
+}
+
+/* Override Odoo fields in hero */
+.to-hero-number .o_field_integer,
+.to-hero-number .o_field_float,
+.to-hero-number .o_field_widget {
+    font-size: 42px !important;
+    font-weight: 900 !important;
+    color: inherit !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    min-height: unset !important;
+    display: inline !important;
+}
+
+.to-hero-sub .o_field_integer,
+.to-hero-sub .o_field_float,
+.to-hero-sub .o_field_widget {
+    font-size: 11px !important;
+    color: #475569 !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    min-height: unset !important;
+    display: inline !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   STAT ROW – Horizontal pill-shaped counters
+   ═══════════════════════════════════════════════════════════════ */
+.to-stats-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.to-stat-pill {
+    flex: 1;
+    min-width: 130px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 40px;
+    padding: 10px 16px;
+    transition: all 0.25s;
+}
+
+.to-stat-pill:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.1);
+}
+
+.to-stat-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.to-stat-dot.c1 { background: #818cf8; box-shadow: 0 0 8px rgba(129,140,248,0.4); }
+.to-stat-dot.c2 { background: #34d399; box-shadow: 0 0 8px rgba(52,211,153,0.4); }
+.to-stat-dot.c3 { background: #fbbf24; box-shadow: 0 0 8px rgba(251,191,36,0.4); }
+.to-stat-dot.c4 { background: #f87171; box-shadow: 0 0 8px rgba(248,113,113,0.4); }
+.to-stat-dot.c5 { background: #38bdf8; box-shadow: 0 0 8px rgba(56,189,248,0.4); }
+.to-stat-dot.c6 { background: #c084fc; box-shadow: 0 0 8px rgba(192,132,252,0.4); }
+
+.to-stat-text {
+    font-size: 12px; font-weight: 500; color: #8892a8;
+}
+
+.to-stat-val {
+    margin-left: auto;
+    font-size: 16px; font-weight: 800; color: #e2e8f0;
+}
+
+.to-stat-val .o_field_integer,
+.to-stat-val .o_field_float,
+.to-stat-val .o_field_widget {
+    font-size: 16px !important; font-weight: 800 !important;
+    color: #e2e8f0 !important; background: transparent !important;
+    border: none !important; padding: 0 !important; min-height: unset !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FINANCIAL BANNER – Gradient strip
+   ═══════════════════════════════════════════════════════════════ */
+.to-finance-banner {
+    background: linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(139,92,246,0.08) 50%, rgba(52,211,153,0.1) 100%);
+    border: 1px solid rgba(139,92,246,0.15);
+    border-radius: 14px;
+    padding: 18px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.to-finance-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, #6366f1, #a855f7, #34d399);
+}
+
+.to-finance-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.to-finance-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 30%; height: 40%; width: 1px;
+    background: rgba(255,255,255,0.06);
+}
+
+.to-finance-label {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1.2px; color: #6c7a93;
+}
+
+.to-finance-val {
+    font-size: 20px; font-weight: 800; color: #e2e8f0;
+}
+
+.to-finance-val .o_field_integer,
+.to-finance-val .o_field_float,
+.to-finance-val .o_field_widget {
+    font-size: 20px !important; font-weight: 800 !important;
+    color: #e2e8f0 !important; background: transparent !important;
+    border: none !important; padding: 0 !important; min-height: unset !important;
+}
+
+.to-finance-item:nth-child(1) .to-finance-val { color: #818cf8; }
+.to-finance-item:nth-child(2) .to-finance-val { color: #f87171; }
+.to-finance-item:nth-child(3) .to-finance-val { color: #34d399; }
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION HEADER
+   ═══════════════════════════════════════════════════════════════ */
+.to-section-header {
+    display: flex; align-items: center; gap: 12px;
+}
+.to-section-line { flex: 1; height: 1px; background: rgba(255,255,255,0.06); }
+.to-section-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; color: #475569; white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MAIN CONTENT – Two columns with visual weight
+   ═══════════════════════════════════════════════════════════════ */
+.to-content-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 16px;
+}
+
+/* ── Panel base ────────────────────────────────────────────── */
+.to-panel {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 14px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.to-panel-title {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.2px; color: #5a6480; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+}
+
+.to-panel-title-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #6366f1;
+}
+
+/* ── Trips list (override ALL Odoo list internals) ──────────── */
+.to-panel .o_list_view,
+.to-content-grid .o_list_view {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.to-panel .o_list_view .o_list_table,
+.to-content-grid .o_list_view .o_list_table {
+    background: transparent !important;
+    color: #c8d6e5 !important;
+}
+
+.to-panel .o_list_view .o_list_table thead,
+.to-content-grid .o_list_view .o_list_table thead {
+    background: transparent !important;
+}
+
+.to-panel .o_list_view .o_list_table thead th,
+.to-content-grid .o_list_view .o_list_table thead th {
+    background: rgba(99,102,241,0.08) !important;
+    color: #7c85a0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+    border-top: none !important;
+    font-size: 9px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    font-weight: 700 !important;
+    padding: 10px 10px !important;
+}
+
+.to-panel .o_list_view .o_list_table tbody td,
+.to-content-grid .o_list_view .o_list_table tbody td {
+    border-bottom: 1px solid rgba(255,255,255,0.03) !important;
+    color: #c8d6e5 !important;
+    padding: 9px 10px !important;
+    font-size: 12px !important;
+    background: transparent !important;
+}
+
+.to-panel .o_list_view .o_list_table tbody td .o_field_widget,
+.to-content-grid .o_list_view .o_list_table tbody td .o_field_widget {
+    color: #c8d6e5 !important;
+    background: transparent !important;
+}
+
+/* Force all text inside list cells to be visible */
+.to-panel .o_list_view *,
+.to-content-grid .o_list_view * {
+    color: inherit;
+}
+
+.to-panel .o_list_view .o_list_table tbody tr,
+.to-content-grid .o_list_view .o_list_table tbody tr {
+    background: transparent !important;
+}
+
+.to-panel .o_list_view .o_list_table tbody tr:hover,
+.to-content-grid .o_list_view .o_list_table tbody tr:hover {
+    background: rgba(99,102,241,0.06) !important;
+}
+
+.to-panel .o_list_view .o_list_table tbody tr:nth-child(even),
+.to-content-grid .o_list_view .o_list_table tbody tr:nth-child(even) {
+    background: rgba(255,255,255,0.01) !important;
+}
+
+.to-panel .o_list_view .o_nocontent_help,
+.to-content-grid .o_list_view .o_nocontent_help {
+    color: #3f4660 !important;
+    padding: 32px !important;
+    text-align: center !important;
+}
+
+/* ── Status panel ──────────────────────────────────────────── */
+.to-fleet-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.to-bar-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.to-bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.to-bar-label {
+    font-size: 12px; font-weight: 500; color: #8892a8;
+    display: flex; align-items: center; gap: 8px;
+}
+
+.to-bar-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+}
+
+.to-bar-dot.available { background: #34d399; }
+.to-bar-dot.ontrip { background: #818cf8; }
+.to-bar-dot.maintenance { background: #fbbf24; }
+.to-bar-dot.retired { background: #f87171; }
+
+.to-bar-count {
+    font-size: 14px; font-weight: 800; color: #e2e8f0;
+}
+
+.to-bar-count .o_field_integer,
+.to-bar-count .o_field_float {
+    font-size: 14px !important; font-weight: 800 !important;
+    color: #e2e8f0 !important; background: transparent !important;
+    border: none !important; padding: 0 !important; min-height: unset !important;
+}
+
+/* Progress bars */
+.to-bar-item .o_progressbar {
+    height: 8px !important;
+    background: rgba(255,255,255,0.04) !important;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.to-bar-item .o_progressbar .o_progressbar_completed {
+    border-radius: 4px;
+    transition: width 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.to-bar-item:nth-child(1) .o_progressbar .o_progressbar_completed {
+    background: linear-gradient(90deg, #059669, #34d399) !important;
+}
+.to-bar-item:nth-child(2) .o_progressbar .o_progressbar_completed {
+    background: linear-gradient(90deg, #6366f1, #818cf8) !important;
+}
+.to-bar-item:nth-child(3) .o_progressbar .o_progressbar_completed {
+    background: linear-gradient(90deg, #d97706, #fbbf24) !important;
+}
+.to-bar-item:nth-child(4) .o_progressbar .o_progressbar_completed {
+    background: linear-gradient(90deg, #dc2626, #f87171) !important;
+}
+
+.to-bar-item .o_progressbar .o_progressbar_text {
+    display: none !important;
+}
+
+/* ── Second row: smaller panels ────────────────────────────── */
+.to-bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+}
+
+.to-bottom-grid .to-panel {
+    padding: 18px;
+}
+
+/* Small metric cards inside panels */
+.to-metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.to-metric-row:last-child { border-bottom: none; }
+
+.to-metric-name {
+    font-size: 12px; color: #7c85a0; font-weight: 500;
+}
+
+.to-metric-val {
+    font-size: 14px; font-weight: 700; color: #e2e8f0;
+}
+
+.to-metric-val .o_field_integer,
+.to-metric-val .o_field_float,
+.to-metric-val .o_field_widget {
+    font-size: 14px !important; font-weight: 700 !important;
+    color: #e2e8f0 !important; background: transparent !important;
+    border: none !important; padding: 0 !important; min-height: unset !important;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+    .to-hero { grid-template-columns: 1fr 1fr; }
+    .to-content-grid { grid-template-columns: 1fr; }
+    .to-bottom-grid { grid-template-columns: 1fr; }
+    .to-stats-row { flex-direction: column; }
+}
+
+@media (max-width: 700px) {
+    .to-hero { grid-template-columns: 1fr; }
+    .to-finance-banner { grid-template-columns: 1fr; }
+}
