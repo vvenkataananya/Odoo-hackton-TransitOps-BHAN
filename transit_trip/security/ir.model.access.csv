@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_transit_trip_user,transit.trip.user,model_transit_trip,base.group_user,1,0,0,0
+access_transit_trip_manager,transit.trip.manager,model_transit_trip,,1,1,1,1
+access_transit_fuel_log_user,transit.fuel.log.user,model_transit_fuel_log,base.group_user,1,0,0,0
+access_transit_fuel_log_manager,transit.fuel.log.manager,model_transit_fuel_log,,1,1,1,1

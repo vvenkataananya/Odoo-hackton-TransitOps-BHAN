@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="transit_license_category_view_form" model="ir.ui.view">
+        <field name="name">transit.license.category.form</field>
+        <field name="model">transit.license.category</field>
+        <field name="arch" type="xml">
+            <form string="License Category">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="License Category"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group string="Description">
+                        <field name="description" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="transit_license_category_view_tree" model="ir.ui.view">
+        <field name="name">transit.license.category.tree</field>
+        <field name="model">transit.license.category</field>
+        <field name="arch" type="xml">
+            <list string="License Categories">
+                <field name="name"/>
+                <field name="code"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="transit_license_category_view_search" model="ir.ui.view">
+        <field name="name">transit.license.category.search</field>
+        <field name="model">transit.license.category</field>
+        <field name="arch" type="xml">
+            <search string="Search License Categories">
+                <field name="name"/>
+                <field name="code"/>
+                <filter name="inactive" string="Archived" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_transit_license_category" model="ir.actions.act_window">
+        <field name="name">License Categories</field>
+        <field name="res_model">transit.license.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="transit_license_category_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first license category.
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_transit_expense_user,transit.expense.user,model_transit_expense,base.group_user,1,0,0,0
+access_transit_expense_manager,transit.expense.manager,model_transit_expense,,1,1,1,1
+access_transit_report_user,transit.report.user,model_transit_report,base.group_user,1,1,1,1
+access_transit_report_manager,transit.report.manager,model_transit_report,,1,1,1,1

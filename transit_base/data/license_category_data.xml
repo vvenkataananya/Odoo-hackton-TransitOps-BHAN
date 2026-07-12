@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="license_category_a" model="transit.license.category">
+            <field name="name">Category A</field>
+            <field name="code">A</field>
+            <field name="description">Two-wheelers</field>
+        </record>
+
+        <record id="license_category_b" model="transit.license.category">
+            <field name="name">Category B</field>
+            <field name="code">B</field>
+            <field name="description">Light motor vehicles - cars, small vans</field>
+        </record>
+
+        <record id="license_category_c" model="transit.license.category">
+            <field name="name">Category C</field>
+            <field name="code">C</field>
+            <field name="description">Heavy vehicles - trucks, buses</field>
+        </record>
+
+        <record id="license_category_d" model="transit.license.category">
+            <field name="name">Category D</field>
+            <field name="code">D</field>
+            <field name="description">Passenger transport vehicles</field>
+        </record>
+    </data>
+</odoo>

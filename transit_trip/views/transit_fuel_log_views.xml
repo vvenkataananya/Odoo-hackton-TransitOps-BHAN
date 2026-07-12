@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="transit_fuel_log_view_form" model="ir.ui.view">
+        <field name="name">transit.fuel.log.form</field>
+        <field name="model">transit.fuel.log</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group string="Fuel Details">
+                            <field name="vehicle_id"/>
+                            <field name="trip_id"/>
+                            <field name="date"/>
+                            <field name="fuel_type"/>
+                        </group>
+                        <group>
+                            <field name="liters"/>
+                            <field name="cost_per_liter"/>
+                            <field name="total_cost"/>
+                            <field name="odometer"/>
+                        </group>
+                    </group>
+                    <group string="Notes">
+                        <field name="notes" placeholder="Additional notes..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="transit_fuel_log_view_tree" model="ir.ui.view">
+        <field name="name">transit.fuel.log.tree</field>
+        <field name="model">transit.fuel.log</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="date"/>
+                <field name="vehicle_id"/>
+                <field name="trip_id"/>
+                <field name="liters"/>
+                <field name="cost_per_liter"/>
+                <field name="total_cost"/>
+                <field name="fuel_type"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="transit_fuel_log_view_search" model="ir.ui.view">
+        <field name="name">transit.fuel.log.search</field>
+        <field name="model">transit.fuel.log</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="vehicle_id"/>
+                <field name="trip_id"/>
+                <separator/>
+                <filter string="Diesel" name="diesel" domain="[('fuel_type','=','diesel')]"/>
+                <filter string="Petrol" name="petrol" domain="[('fuel_type','=','petrol')]"/>
+                <filter string="Electric" name="electric" domain="[('fuel_type','=','electric')]"/>
+                <filter string="CNG" name="cng" domain="[('fuel_type','=','cng')]"/>
+                <separator/>
+                <filter string="This Month" name="this_month"
+                        domain="[('date','&gt;=', (context_today() - relativedelta(months=1)).strftime('%Y-%m-%d'))]"/>
+                <group>
+                    <filter string="Vehicle" name="group_by_vehicle" context="{'group_by':'vehicle_id'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by':'date'}"/>
+                    <filter string="Fuel Type" name="group_by_fuel_type" context="{'group_by':'fuel_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="transit_fuel_log_action" model="ir.actions.act_window">
+        <field name="name">Fuel Logs</field>
+        <field name="res_model">transit.fuel.log</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="transit_fuel_log_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Record your first fuel log
+            </p>
+            <p>
+                Track fuel consumption for your vehicles.
+            </p>
+        </field>
+    </record>
+
+</odoo>

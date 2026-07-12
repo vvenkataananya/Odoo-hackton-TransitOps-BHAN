@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="transit_driver_form" model="ir.ui.view">
+        <field name="name">transit.driver.form</field>
+        <field name="model">transit.driver</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Driver Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="License Information">
+                            <field name="license_number"/>
+                            <field name="license_category_id"/>
+                            <field name="license_expiry_date"/>
+                        </group>
+                        <group string="Contact">
+                            <field name="contact_number"/>
+                            <field name="email"/>
+                            <field name="partner_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Personal Details">
+                            <field name="date_of_birth"/>
+                            <field name="address"/>
+                        </group>
+                        <group string="Employment">
+                            <field name="safety_score"/>
+                            <field name="status"/>
+                            <field name="active"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notes" name="notes">
+                            <field name="note" placeholder="Additional notes..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="transit_driver_tree" model="ir.ui.view">
+        <field name="name">transit.driver.tree</field>
+        <field name="model">transit.driver</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="license_number"/>
+                <field name="license_category_id"/>
+                <field name="license_expiry_date"/>
+                <field name="safety_score"/>
+                <field name="status" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="transit_driver_search" model="ir.ui.view">
+        <field name="name">transit.driver.search</field>
+        <field name="model">transit.driver</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="license_number"/>
+                <field name="license_category_id"/>
+                <filter name="filter_available" string="Available"
+                        domain="[('status', '=', 'available')]"/>
+                <filter name="filter_on_trip" string="On Trip"
+                        domain="[('status', '=', 'on_trip')]"/>
+                <filter name="filter_off_duty" string="Off Duty"
+                        domain="[('status', '=', 'off_duty')]"/>
+                <filter name="filter_suspended" string="Suspended"
+                        domain="[('status', '=', 'suspended')]"/>
+                <group>
+                    <filter name="group_status" string="Status"
+                            context="{'group_by': 'status'}"/>
+                    <filter name="group_license_category" string="License Category"
+                            context="{'group_by': 'license_category_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_transit_driver" model="ir.actions.act_window">
+        <field name="name">Drivers</field>
+        <field name="res_model">transit.driver</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="transit_driver_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first driver profile!
+            </p>
+            <p>
+                Manage driver profiles, track licenses, and monitor compliance.
+            </p>
+        </field>
+    </record>
+</odoo>

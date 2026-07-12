@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="vehicle_type_truck" model="transit.vehicle.type">
+            <field name="name">Truck</field>
+            <field name="code">TRK</field>
+            <field name="description">Heavy goods transport vehicle</field>
+        </record>
+
+        <record id="vehicle_type_van" model="transit.vehicle.type">
+            <field name="name">Van</field>
+            <field name="code">VAN</field>
+            <field name="description">Light commercial vehicle for small deliveries</field>
+        </record>
+
+        <record id="vehicle_type_bus" model="transit.vehicle.type">
+            <field name="name">Bus</field>
+            <field name="code">BUS</field>
+            <field name="description">Passenger transport vehicle</field>
+        </record>
+
+        <record id="vehicle_type_trailer" model="transit.vehicle.type">
+            <field name="name">Trailer</field>
+            <field name="code">TRL</field>
+            <field name="description">Towed cargo vehicle</field>
+        </record>
+    </data>
+</odoo>

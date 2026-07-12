@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id="menu_transit_root"
+        name="TransitOps"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_transit_configuration"
+        name="Configuration"
+        parent="menu_transit_root"
+        sequence="50"
+    />
+
+    <menuitem
+        id="menu_transit_vehicle_type"
+        name="Vehicle Types"
+        parent="menu_transit_configuration"
+        action="action_transit_vehicle_type"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_transit_license_category"
+        name="License Categories"
+        parent="menu_transit_configuration"
+        action="action_transit_license_category"
+        sequence="20"
+    />
+
+    <menuitem
+        id="menu_transit_settings"
+        name="Settings"
+        parent="menu_transit_configuration"
+        action="base_setup.action_general_configuration"
+        sequence="30"
+    />
+</odoo>

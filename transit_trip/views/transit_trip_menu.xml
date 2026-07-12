@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="transit_trip_menu_root"
+              name="Trips"
+              parent="transit_fleet.menu_transit_fleet"
+              sequence="20"/>
+
+    <menuitem id="transit_trip_menu_all"
+              name="All Trips"
+              parent="transit_trip_menu_root"
+              action="transit_trip_action"
+              sequence="10"/>
+
+    <menuitem id="transit_fuel_log_menu"
+              name="Fuel Logs"
+              parent="transit_trip_menu_root"
+              action="transit_fuel_log_action"
+              sequence="20"/>
+
+</odoo>
