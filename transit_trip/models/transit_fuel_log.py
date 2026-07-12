@@ -1,9 +1,10 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class TransitFuelLog(models.Model):
     _name = 'transit.fuel.log'
     _description = 'Transit Fuel Log'
+    _inherit = ['mail.thread']
     _order = 'date desc'
 
     trip_id = fields.Many2one('transit.trip', string="Trip", ondelete='set null')
@@ -11,7 +12,7 @@ class TransitFuelLog(models.Model):
     liters = fields.Float(required=True, help="Fuel quantity in liters")
     cost_per_liter = fields.Float(required=True, help="Cost per liter")
     total_cost = fields.Float(compute='_compute_total_cost', store=True, string="Total Cost")
-    date = fields.Date(required=True, default=fields.Date.context_today)
+    date = fields.Date(required=True, default=lambda self: fields.Date.context_today(self))
     odometer = fields.Float(help="Odometer reading at fueling")
     fuel_type = fields.Selection([
         ('diesel', 'Diesel'),
@@ -22,6 +23,7 @@ class TransitFuelLog(models.Model):
     company_id = fields.Many2one('res.company', default=lambda self: self.env.company)
     notes = fields.Char()
 
+    @api.depends('liters', 'cost_per_liter')
     def _compute_total_cost(self):
         for rec in self:
             rec.total_cost = rec.liters * rec.cost_per_liter

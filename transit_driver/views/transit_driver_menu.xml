@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
+    <!-- Drivers — top-level, Fleet Manager + Safety Officer -->
     <menuitem
         id="menu_transit_drivers"
         name="Drivers"
         parent="transit_base.menu_transit_root"
         action="action_transit_driver"
-        sequence="20"
+        sequence="30"
+        groups="transit_base.group_fleet_manager,transit_base.group_safety_officer"
     />
-
 </odoo>

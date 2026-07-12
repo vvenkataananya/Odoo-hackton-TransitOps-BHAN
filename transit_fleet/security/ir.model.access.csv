@@ -1,5 +1,9 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_transit_vehicle_user,transit.vehicle.user,model_transit_vehicle,base.group_user,1,0,0,0
-access_transit_vehicle_manager,transit.vehicle.manager,model_transit_vehicle,,1,1,1,1
-access_transit_maintenance_user,transit.maintenance.user,model_transit_maintenance,base.group_user,1,0,0,0
-access_transit_maintenance_manager,transit.maintenance.manager,model_transit_maintenance,,1,1,1,1
+access_transit_vehicle_fleet_manager,transit.vehicle.fleet_manager,model_transit_vehicle,transit_base.group_fleet_manager,1,1,1,1
+access_transit_vehicle_driver,transit.vehicle.driver,model_transit_vehicle,transit_base.group_driver,1,0,0,0
+access_transit_vehicle_safety_officer,transit.vehicle.safety_officer,model_transit_vehicle,transit_base.group_safety_officer,1,0,0,0
+access_transit_vehicle_financial,transit.vehicle.financial,model_transit_vehicle,transit_base.group_financial_analyst,1,0,0,0
+access_transit_maintenance_fleet_manager,transit.maintenance.fleet_manager,model_transit_maintenance,transit_base.group_fleet_manager,1,1,1,1
+access_transit_maintenance_driver,transit.maintenance.driver,model_transit_maintenance,transit_base.group_driver,1,0,0,0
+access_transit_maintenance_safety_officer,transit.maintenance.safety_officer,model_transit_maintenance,transit_base.group_safety_officer,1,0,0,0
+access_transit_maintenance_financial,transit.maintenance.financial,model_transit_maintenance,transit_base.group_financial_analyst,1,0,0,0

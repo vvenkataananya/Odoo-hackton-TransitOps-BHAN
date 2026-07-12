@@ -5,6 +5,18 @@
         <field name="model">transit.expense</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_approve" string="Approve" type="object"
+                            class="oe_highlight" invisible="state != 'draft'"
+                            groups="transit_base.group_financial_analyst"/>
+                    <button name="action_reject" string="Reject" type="object"
+                            invisible="state != 'draft'"
+                            groups="transit_base.group_financial_analyst"/>
+                    <button name="action_reset_draft" string="Reset to Draft" type="object"
+                            invisible="state not in ('approved', 'rejected')"
+                            groups="transit_base.group_financial_analyst"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,approved"/>
+                </header>
                 <sheet>
                     <div class="oe_title">
                         <h1>

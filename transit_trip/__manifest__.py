@@ -8,6 +8,7 @@
     'depends': ['transit_fleet', 'transit_driver'],
     'data': [
         'security/ir.model.access.csv',
+        'data/ir_sequence.xml',
         'views/transit_trip_views.xml',
         'views/transit_fuel_log_views.xml',
         'views/transit_trip_menu.xml',

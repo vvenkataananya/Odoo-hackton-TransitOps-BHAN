@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Dashboard — visible to all TransitOps roles -->
+    <menuitem id="menu_transit_dashboard"
+              name="Dashboard"
+              parent="transit_base.menu_transit_root"
+              action="transit_dashboard_action"
+              sequence="5"
+              groups="transit_base.group_fleet_manager,transit_base.group_driver,transit_base.group_safety_officer,transit_base.group_financial_analyst"/>
+</odoo>

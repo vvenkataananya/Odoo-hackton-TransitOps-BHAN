@@ -7,6 +7,7 @@
     'author': 'TransitOps',
     'depends': ['base', 'mail', 'base_setup'],
     'data': [
+        'security/transit_security.xml',
         'security/ir.model.access.csv',
         'views/transit_vehicle_type_views.xml',
         'views/transit_license_category_views.xml',

@@ -5,6 +5,12 @@
         <field name="model">transit.report</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_generate_report" string="Generate Report" type="object"
+                            class="oe_highlight"/>
+                    <button name="action_export_csv_download" string="Export CSV" type="object"
+                            invisible="not result_line_ids"/>
+                </header>
                 <sheet>
                     <div class="oe_title">
                         <h1>Report Generator</h1>
@@ -21,8 +27,8 @@
                         </group>
                     </group>
                     <separator string="Report Results"/>
-                    <field name="result_line_ids" readonly="1">
-                        <list editable="bottom">
+                    <field name="result_line_ids">
+                        <list editable="bottom" create="false" delete="false">
                             <field name="metric"/>
                             <field name="label"/>
                             <field name="vehicle_name"/>
