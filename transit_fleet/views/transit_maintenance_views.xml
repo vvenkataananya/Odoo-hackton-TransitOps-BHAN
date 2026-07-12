@@ -8,16 +8,16 @@
                 <header>
                     <button name="action_start" string="Start Maintenance" type="object"
                             class="oe_highlight" invisible="state != 'draft'"
-                            groups="transit_base.group_fleet_manager"/>
-                    <button name="action_close" string="Close Maintenance" type="object"
-                            class="oe_highlight" invisible="state != 'in_progress'"
-                            groups="transit_base.group_fleet_manager"/>
-                    <button name="action_cancel" string="Cancel" type="object"
-                            invisible="state not in ('draft', 'in_progress')"
-                            groups="transit_base.group_fleet_manager"/>
-                    <button name="action_reset_draft" string="Reset to Draft" type="object"
-                            invisible="state != 'cancelled'"
-                            groups="transit_base.group_fleet_manager"/>
+groups="transit_base.group_fleet_manager,transit_base.group_safety_officer"/>
+                     <button name="action_close" string="Close Maintenance" type="object"
+                             class="oe_highlight" invisible="state != 'in_progress'"
+                             groups="transit_base.group_fleet_manager,transit_base.group_safety_officer"/>
+                     <button name="action_cancel" string="Cancel" type="object"
+                             invisible="state not in ('draft', 'in_progress')"
+                             groups="transit_base.group_fleet_manager,transit_base.group_safety_officer"/>
+                     <button name="action_reset_draft" string="Reset to Draft" type="object"
+                             invisible="state != 'cancelled'"
+                             groups="transit_base.group_fleet_manager,transit_base.group_safety_officer"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,done"/>
                 </header>
                 <sheet>

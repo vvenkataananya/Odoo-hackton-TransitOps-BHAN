@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- Root menu: TransitOps application -->
     <menuitem
         id="menu_transit_root"
         name="TransitOps"
         sequence="10"
+        web_icon="transit_base,static/description/icon.png"
     />
 
+    <!-- Settings menu — Fleet Manager only -->
     <menuitem
         id="menu_transit_configuration"
-        name="Configuration"
+        name="Settings"
         parent="menu_transit_root"
-        sequence="50"
+        sequence="90"
+        groups="transit_base.group_fleet_manager"
     />
 
     <menuitem
@@ -19,6 +23,7 @@
         parent="menu_transit_configuration"
         action="action_transit_vehicle_type"
         sequence="10"
+        groups="transit_base.group_fleet_manager"
     />
 
     <menuitem
@@ -27,13 +32,15 @@
         parent="menu_transit_configuration"
         action="action_transit_license_category"
         sequence="20"
+        groups="transit_base.group_fleet_manager"
     />
 
     <menuitem
         id="menu_transit_settings"
-        name="Settings"
+        name="Odoo Settings"
         parent="menu_transit_configuration"
         action="base_setup.action_general_configuration"
         sequence="30"
+        groups="transit_base.group_fleet_manager"
     />
 </odoo>

@@ -32,6 +32,8 @@ class TransitTrip(models.Model):
     completion_date = fields.Datetime(help="When the trip was completed")
     final_odometer = fields.Float(help="Final odometer reading at trip end")
     fuel_consumed = fields.Float(help="Total fuel consumed during trip in liters")
+    fuel_cost_per_liter = fields.Float(string="Fuel Cost/Liter", help="Price per liter of fuel")
+    total_fuel_price = fields.Float(compute='_compute_total_fuel_price', string="Total Fuel Price")
     source_latitude = fields.Float(help="Source latitude coordinate")
     source_longitude = fields.Float(help="Source longitude coordinate")
     destination_latitude = fields.Float(help="Destination latitude coordinate")
@@ -56,6 +58,10 @@ class TransitTrip(models.Model):
             if vals.get('name', 'New Trip') == 'New Trip':
                 vals['name'] = self.env['ir.sequence'].next_by_code('transit.trip') or 'New Trip'
         return super().create(vals_list)
+
+    def _compute_total_fuel_price(self):
+        for trip in self:
+            trip.total_fuel_price = trip.fuel_consumed * trip.fuel_cost_per_liter
 
     def _compute_trip_metrics(self):
         for trip in self:
@@ -155,6 +161,18 @@ class TransitTrip(models.Model):
                 'state': 'completed',
                 'completion_date': fields.Datetime.now(),
             })
+
+            if trip.fuel_consumed > 0 and trip.fuel_cost_per_liter > 0:
+                self.env['transit.fuel.log'].create({
+                    'trip_id': trip.id,
+                    'vehicle_id': trip.vehicle_id.id,
+                    'liters': trip.fuel_consumed,
+                    'cost_per_liter': trip.fuel_cost_per_liter,
+                    'date': fields.Date.today(),
+                    'odometer': trip.final_odometer,
+                    'notes': 'Auto-created from trip %s' % trip.name,
+                })
+
             trip.vehicle_id.write({
                 'status': 'available',
                 'current_odometer': trip.final_odometer,
@@ -186,7 +204,11 @@ class TransitTrip(models.Model):
             'res_model': 'transit.fuel.log',
             'view_mode': 'list,form',
             'domain': [('trip_id', '=', self.id)],
-            'context': {'default_trip_id': self.id, 'default_vehicle_id': self.vehicle_id.id},
+            'context': {
+                'default_trip_id': self.id,
+                'default_vehicle_id': self.vehicle_id.id,
+                'default_liters': self.fuel_consumed,
+            },
         }
 
     def action_view_expenses(self):

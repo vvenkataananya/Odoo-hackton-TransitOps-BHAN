@@ -1,0 +1,20 @@
+/* TransitOps login role dropdown */
+.to-role-section { margin-bottom: 16px; }
+.to-role-label {
+    display: block; font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; color: #7c85a0; margin-bottom: 6px;
+}
+.to-role-select-wrapper { position: relative; }
+.to-role-select-wrapper select {
+    width: 100%; appearance: none; -webkit-appearance: none;
+    background: #fff; border: 1px solid #ccc; border-radius: 4px;
+    color: #333; padding: 8px 32px 8px 10px; font-size: 14px;
+    cursor: pointer; outline: none; height: auto;
+}
+.to-role-select-wrapper select:focus {
+    border-color: #007bff; box-shadow: 0 0 0 2px rgba(0,123,255,0.15);
+}
+.to-role-select-arrow {
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    color: #666; pointer-events: none; display: flex; align-items: center;
+}

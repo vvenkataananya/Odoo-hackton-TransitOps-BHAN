@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- Fuel & Expenses — Fleet Manager + Driver + Safety Officer + Financial Analyst -->
     <menuitem id="transit_finance_menu"
-              name="Finance"
-              parent="transit_trip.transit_trip_menu_root"
-              sequence="50"/>
+              name="Fuel &amp; Expenses"
+              parent="transit_base.menu_transit_root"
+              sequence="60"
+              groups="transit_base.group_fleet_manager,transit_base.group_driver,transit_base.group_safety_officer,transit_base.group_financial_analyst"/>
 
     <menuitem id="transit_expense_menu"
               name="Expenses"
               parent="transit_finance_menu"
               action="transit_expense_action"
-              sequence="10"/>
+              sequence="10"
+              groups="transit_base.group_fleet_manager,transit_base.group_driver,transit_base.group_safety_officer,transit_base.group_financial_analyst"/>
+
+    <menuitem id="transit_finance_fuel_log_menu"
+              name="Fuel Logs"
+              parent="transit_finance_menu"
+              action="transit_trip.transit_fuel_log_action"
+              sequence="20"
+              groups="transit_base.group_fleet_manager,transit_base.group_driver,transit_base.group_financial_analyst"/>
+
+    <!-- Analytics — Fleet Manager + Safety Officer + Financial Analyst -->
+    <menuitem id="transit_analytics_menu"
+              name="Analytics"
+              parent="transit_base.menu_transit_root"
+              sequence="70"
+              groups="transit_base.group_fleet_manager,transit_base.group_financial_analyst"/>
 
     <menuitem id="transit_report_menu"
               name="Reports &amp; Analytics"
-              parent="transit_finance_menu"
+              parent="transit_analytics_menu"
               action="transit_report_wizard_action"
-              sequence="20"/>
+              sequence="10"
+              groups="transit_base.group_fleet_manager,transit_base.group_financial_analyst"/>
 </odoo>

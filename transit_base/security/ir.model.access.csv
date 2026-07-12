@@ -1,8 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_transit_vehicle_type_fleet_manager,transit.vehicle.type.fleet_manager,model_transit_vehicle_type,transit_base.group_fleet_manager,1,1,1,1
 access_transit_vehicle_type_safety_officer,transit.vehicle.type.safety_officer,model_transit_vehicle_type,transit_base.group_safety_officer,1,0,0,0
-access_transit_vehicle_type_user,transit.vehicle.type.user,model_transit_vehicle_type,base.group_user,1,0,0,0
 access_transit_license_category_fleet_manager,transit.license.category.fleet_manager,model_transit_license_category,transit_base.group_fleet_manager,1,1,1,1
-access_transit_license_category_safety_officer,transit.license.category.safety_officer,model_transit_license_category,transit_base.group_safety_officer,1,1,1,1
-access_transit_license_category_user,transit.license.category.user,model_transit_license_category,base.group_user,1,0,0,0
+access_transit_license_category_safety_officer,transit.license.category.safety_officer,model_transit_license_category,transit_base.group_safety_officer,1,0,0,0
 access_res_config_settings_admin,res.config.settings.admin,model_res_config_settings,base.group_system,1,1,1,1

@@ -1,0 +1,373 @@
+/* ============================================================
+   TransitOps — Backend Theme (Dashboard + Sidebar)
+   Applies dark theme ONLY to dashboard and app sidebar.
+   Other views (Fleet, Drivers, Trips, etc.) remain unstyled.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── CSS Variables ────────────────────────────────────────── */
+:root {
+    --to-bg-primary: #111111;
+    --to-bg-secondary: #1a1a1a;
+    --to-bg-card: #1e1e1e;
+    --to-bg-sidebar: #191919;
+    --to-border: #2a2a2a;
+    --to-accent: #c8860a;
+    --to-accent-hover: #d9940b;
+    --to-text-primary: #e8e4d9;
+    --to-text-secondary: #888880;
+    --to-text-muted: #555550;
+    --to-green: #22c55e;
+    --to-blue: #3b82f6;
+    --to-orange: #f97316;
+    --to-gray: #6b7280;
+    --to-red: #ef4444;
+    --to-font-mono: 'Share Tech Mono', monospace;
+    --to-font-sans: 'Inter', sans-serif;
+}
+
+/* ============================================================
+   SIDEBAR — Dark TransitOps styled nav
+   ============================================================ */
+
+/* Main app menu (left nav) */
+.o_action_manager ~ .o_main_navbar,
+.o_web_client .o_main_navbar {
+    background: var(--to-bg-sidebar) !important;
+    border-bottom: 1px solid var(--to-border) !important;
+}
+
+/* App switcher / home menu */
+.o_menu_brand {
+    color: var(--to-text-primary) !important;
+    font-family: var(--to-font-mono) !important;
+    font-size: 16px !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* TransitOps app main nav background */
+.o_web_client .o_action_manager {
+    background: var(--to-bg-primary) !important;
+}
+
+/* The vertical app nav sidebar */
+.o_navbar,
+.o_main_navbar {
+    background: var(--to-bg-sidebar) !important;
+}
+
+/* Nav menu items */
+.o_menu_sections > .o_nav_entry,
+.o_menu_sections .o_dropdown > .o_dropdown_button,
+.o_menu_sections > li > a {
+    color: var(--to-text-secondary) !important;
+    font-family: var(--to-font-mono) !important;
+    font-size: 13px !important;
+    transition: color 0.15s ease !important;
+}
+
+.o_menu_sections > .o_nav_entry:hover,
+.o_menu_sections > li > a:hover {
+    color: var(--to-text-primary) !important;
+    background: rgba(200, 134, 10, 0.08) !important;
+}
+
+/* Active menu item — golden highlight */
+.o_menu_sections > .o_nav_entry.active,
+.o_menu_sections > .o_nav_entry.o_active,
+.o_menu_sections > li.active > a {
+    color: var(--to-text-primary) !important;
+    background: var(--to-accent) !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+}
+
+/* ============================================================
+   DASHBOARD — Full dark styled view
+   Only targets transit.dashboard form view
+   ============================================================ */
+
+/* Dashboard wrapper */
+.o_form_view.transitops-dashboard {
+    background: var(--to-bg-primary) !important;
+    color: var(--to-text-primary) !important;
+    font-family: var(--to-font-sans) !important;
+    min-height: 100vh;
+}
+
+.o_form_view.transitops-dashboard .o_form_sheet {
+    background: var(--to-bg-primary) !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+}
+
+.o_form_view.transitops-dashboard .o_form_sheet_bg {
+    background: var(--to-bg-primary) !important;
+}
+
+/* ── Dashboard Container ──────────────────────────────────── */
+.to-dashboard {
+    padding: 24px 28px;
+    background: var(--to-bg-primary);
+    min-height: 100vh;
+    font-family: var(--to-font-sans);
+    color: var(--to-text-primary);
+}
+
+/* ── Filter Bar ───────────────────────────────────────────── */
+.to-filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.to-filter-label {
+    font-family: var(--to-font-mono);
+    font-size: 10px;
+    color: var(--to-text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-right: 4px;
+    align-self: center;
+}
+
+.to-filter-select {
+    background: var(--to-bg-card);
+    border: 1px solid var(--to-border);
+    border-radius: 6px;
+    color: var(--to-text-secondary);
+    font-family: var(--to-font-mono);
+    font-size: 12px;
+    padding: 6px 28px 6px 12px;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888880' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    transition: border-color 0.2s ease;
+}
+
+.to-filter-select:focus {
+    border-color: var(--to-accent);
+}
+
+/* ── KPI Cards Row ────────────────────────────────────────── */
+.to-kpi-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+@media (max-width: 1400px) {
+    .to-kpi-row { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 900px) {
+    .to-kpi-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+.to-kpi-card {
+    background: var(--to-bg-card);
+    border: 1px solid var(--to-border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+    cursor: default;
+}
+
+.to-kpi-card:hover {
+    border-color: #3a3a3a;
+    transform: translateY(-2px);
+}
+
+.to-kpi-card.accent { border-top: 2px solid var(--to-accent); }
+.to-kpi-card.green { border-top: 2px solid var(--to-green); }
+.to-kpi-card.orange { border-top: 2px solid var(--to-orange); }
+.to-kpi-card.blue { border-top: 2px solid var(--to-blue); }
+
+.to-kpi-label {
+    font-family: var(--to-font-mono);
+    font-size: 9px;
+    color: var(--to-text-muted);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.to-kpi-value {
+    font-family: var(--to-font-mono);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--to-text-primary);
+    line-height: 1;
+}
+
+.to-kpi-card.accent .to-kpi-value { color: var(--to-accent); }
+.to-kpi-card.green .to-kpi-value { color: var(--to-green); }
+.to-kpi-card.orange .to-kpi-value { color: var(--to-orange); }
+.to-kpi-card.blue .to-kpi-value { color: var(--to-blue); }
+
+/* ── Main Content Area (2 columns) ───────────────────────── */
+.to-main-row {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 20px;
+    align-items: start;
+}
+
+@media (max-width: 1100px) {
+    .to-main-row { grid-template-columns: 1fr; }
+}
+
+/* ── Section Title ────────────────────────────────────────── */
+.to-section-title {
+    font-family: var(--to-font-mono);
+    font-size: 11px;
+    color: var(--to-text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--to-border);
+}
+
+/* ── Recent Trips Table ───────────────────────────────────── */
+.to-trips-table {
+    background: var(--to-bg-card);
+    border: 1px solid var(--to-border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.to-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.to-table th {
+    font-family: var(--to-font-mono);
+    font-size: 9px;
+    color: var(--to-text-muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--to-border);
+    background: var(--to-bg-secondary);
+}
+
+.to-table td {
+    font-family: var(--to-font-mono);
+    font-size: 13px;
+    color: var(--to-text-primary);
+    padding: 11px 16px;
+    border-bottom: 1px solid #1e1e1e;
+    vertical-align: middle;
+}
+
+.to-table tr:last-child td {
+    border-bottom: none;
+}
+
+.to-table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* ── Status Badges ────────────────────────────────────────── */
+.to-badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-family: var(--to-font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: capitalize;
+}
+
+.to-badge-green { background: var(--to-green); color: #0a2a18; }
+.to-badge-blue { background: var(--to-blue); color: #0a1a3a; }
+.to-badge-orange { background: var(--to-orange); color: #2a1a08; }
+.to-badge-gray { background: var(--to-gray); color: #1a1a1a; }
+.to-badge-red { background: var(--to-red); color: #2a0a0a; }
+
+/* ── Vehicle Status Panel ─────────────────────────────────── */
+.to-status-panel {
+    background: var(--to-bg-card);
+    border: 1px solid var(--to-border);
+    border-radius: 8px;
+    padding: 18px 16px;
+}
+
+.to-status-row {
+    margin-bottom: 14px;
+}
+
+.to-status-row:last-child {
+    margin-bottom: 0;
+}
+
+.to-status-row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.to-status-name {
+    font-family: var(--to-font-mono);
+    font-size: 12px;
+    color: var(--to-text-secondary);
+}
+
+.to-status-count {
+    font-family: var(--to-font-mono);
+    font-size: 11px;
+    color: var(--to-text-muted);
+}
+
+.to-status-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: var(--to-border);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.to-status-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s ease;
+}
+
+.to-bar-green { background: var(--to-green); }
+.to-bar-blue { background: var(--to-blue); }
+.to-bar-orange { background: var(--to-orange); }
+.to-bar-red { background: var(--to-red); }
+
+/* ── Odoo form view header hide for dashboard ─────────────── */
+.o_form_view.transitops-dashboard .o_form_statusbar {
+    display: none !important;
+}
+
+.o_form_view.transitops-dashboard .o_control_panel {
+    background: #111111 !important;
+    border-bottom: 1px solid var(--to-border) !important;
+}
+
+.o_form_view.transitops-dashboard .breadcrumb-item,
+.o_form_view.transitops-dashboard .breadcrumb-item a,
+.o_form_view.transitops-dashboard .o_control_panel_breadcrumbs {
+    color: var(--to-text-secondary) !important;
+    font-family: var(--to-font-mono) !important;
+}

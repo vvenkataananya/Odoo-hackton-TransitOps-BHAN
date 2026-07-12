@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- Fleet — visible to Fleet Manager + Safety Officer -->
     <menuitem id="menu_transit_fleet"
               name="Fleet"
               parent="transit_base.menu_transit_root"
-              sequence="20"/>
+              sequence="20"
+              groups="transit_base.group_fleet_manager,transit_base.group_safety_officer"/>
 
     <menuitem id="menu_transit_fleet_vehicles"
               name="Vehicles"
               parent="menu_transit_fleet"
               action="action_transit_vehicle"
-              sequence="10"/>
+              sequence="10"
+              groups="transit_base.group_fleet_manager,transit_base.group_safety_officer"/>
+
+    <!-- Maintenance — visible to Fleet Manager + Safety Officer -->
+    <menuitem id="menu_transit_maintenance"
+              name="Maintenance"
+              parent="transit_base.menu_transit_root"
+              sequence="50"
+              groups="transit_base.group_fleet_manager,transit_base.group_safety_officer"/>
 
     <menuitem id="menu_transit_fleet_maintenance"
-              name="Maintenance"
-              parent="menu_transit_fleet"
+              name="Service Records"
+              parent="menu_transit_maintenance"
               action="action_transit_maintenance"
-              sequence="20"/>
+              sequence="10"
+              groups="transit_base.group_fleet_manager,transit_base.group_safety_officer"/>
 </odoo>
