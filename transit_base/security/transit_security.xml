@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_transitops" model="ir.module.category">
+        <field name="name">TransitOps</field>
+        <field name="sequence">100</field>
+    </record>
+
+    <record id="privilege_transitops" model="res.groups.privilege">
+        <field name="name">TransitOps</field>
+        <field name="category_id" ref="module_category_transitops"/>
+    </record>
+
+    <record id="group_driver" model="res.groups">
+        <field name="name">Driver</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="privilege_id" ref="privilege_transitops"/>
+    </record>
+
+    <record id="group_safety_officer" model="res.groups">
+        <field name="name">Safety Officer</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="privilege_id" ref="privilege_transitops"/>
+    </record>
+
+    <record id="group_financial_analyst" model="res.groups">
+        <field name="name">Financial Analyst</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="privilege_id" ref="privilege_transitops"/>
+    </record>
+
+    <record id="group_fleet_manager" model="res.groups">
+        <field name="name">Fleet Manager</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="privilege_id" ref="privilege_transitops"/>
+    </record>
+
+    <record id="rule_transit_vehicle_type_company" model="ir.rule">
+        <field name="name">Vehicle Type: Multi-Company</field>
+        <field name="model_id" ref="model_transit_vehicle_type"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_transit_license_category_company" model="ir.rule">
+        <field name="name">License Category: Multi-Company</field>
+        <field name="model_id" ref="model_transit_license_category"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

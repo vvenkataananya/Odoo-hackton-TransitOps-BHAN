@@ -5,41 +5,78 @@
         <field name="model">transit.trip</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_dispatch" string="Dispatch Trip" type="object"
+                            class="oe_highlight" invisible="state != 'draft'"
+                            groups="transit_base.group_fleet_manager"/>
+                    <button name="action_complete" string="Complete Trip" type="object"
+                            class="oe_highlight" invisible="state != 'dispatched'"
+                            groups="transit_base.group_fleet_manager"/>
+                    <button name="action_cancel" string="Cancel Trip" type="object"
+                            invisible="state not in ('draft', 'dispatched')"
+                            groups="transit_base.group_fleet_manager"/>
+                    <button name="action_reset_draft" string="Reset to Draft" type="object"
+                            invisible="state != 'cancelled'"
+                            groups="transit_base.group_fleet_manager"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,dispatched,completed"/>
+                </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_fuel_logs" type="object" class="oe_stat_button"
+                                icon="fa-tint">
+                            <field name="total_fuel_cost" widget="statinfo" string="Fuel Cost"/>
+                        </button>
+                        <button name="action_view_expenses" type="object" class="oe_stat_button"
+                                icon="fa-money">
+                            <field name="total_trip_expenses" widget="statinfo" string="Expenses"/>
+                        </button>
+                        <div class="oe_stat_button" icon="fa-calculator">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value" name="operational_cost"/>
+                                <span class="o_stat_text">Op. Cost</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="oe_title">
                         <h1>
                             <field name="name" placeholder="Trip Name"/>
                         </h1>
+                        <field name="priority" widget="priority"/>
                     </div>
                     <group>
                         <group>
                             <field name="source"/>
                             <field name="destination"/>
-                            <field name="source_latitude"/>
-                            <field name="source_longitude"/>
+                            <field name="source_latitude" invisible="1"/>
+                            <field name="source_longitude" invisible="1"/>
                         </group>
                         <group>
                             <field name="vehicle_id"/>
                             <field name="driver_id"/>
                             <field name="cargo_weight"/>
                             <field name="planned_distance"/>
-                            <field name="state"/>
-                            <field name="priority"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Trip Details" name="trip_details">
                             <group>
-                                <group>
+                                <group string="Completion Info">
                                     <field name="actual_distance"/>
-                                    <field name="final_odometer"/>
-                                    <field name="fuel_consumed"/>
+                                    <field name="final_odometer" readonly="state != 'dispatched'"/>
+                                    <field name="fuel_consumed" readonly="state != 'dispatched'"/>
                                 </group>
-                                <group>
+                                <group string="Dates &amp; Location">
                                     <field name="dispatch_date"/>
                                     <field name="completion_date"/>
-                                    <field name="destination_latitude"/>
-                                    <field name="destination_longitude"/>
+                                    <field name="destination_latitude" invisible="1"/>
+                                    <field name="destination_longitude" invisible="1"/>
+                                </group>
+                            </group>
+                            <group string="Metrics">
+                                <group>
+                                    <field name="fuel_efficiency" readonly="1"/>
+                                    <field name="duration_hours" readonly="1"/>
+                                    <field name="operational_cost" readonly="1"/>
                                 </group>
                             </group>
                         </page>
@@ -48,6 +85,7 @@
                         </page>
                     </notebook>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -65,10 +103,15 @@
                 <field name="destination"/>
                 <field name="vehicle_id"/>
                 <field name="driver_id"/>
-                <field name="state" widget="badge"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'dispatched'"
+                       decoration-success="state == 'completed'"
+                       decoration-danger="state == 'cancelled'"
+                       decoration-warning="state == 'draft'"/>
                 <field name="priority" widget="priority"/>
                 <field name="planned_distance"/>
                 <field name="cargo_weight"/>
+                <field name="dispatch_date"/>
             </list>
         </field>
     </record>
@@ -83,7 +126,6 @@
                 <field name="destination"/>
                 <field name="vehicle_id"/>
                 <field name="driver_id"/>
-                <separator/>
                 <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
                 <filter string="Dispatched" name="dispatched" domain="[('state','=','dispatched')]"/>
                 <filter string="Completed" name="completed" domain="[('state','=','completed')]"/>
