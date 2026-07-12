@@ -7,6 +7,14 @@ class TransitVehicle(models.Model):
     _description = 'Transit Vehicle'
     _inherit = ['mail.thread']
     _order = 'registration_number'
+    _rec_name = 'display_name'
+
+    display_name = fields.Char(compute='_compute_display_name', store=True)
+
+    @api.depends('vehicle_name', 'registration_number')
+    def _compute_display_name(self):
+        for rec in self:
+            rec.display_name = '%s (%s)' % (rec.vehicle_name or '', rec.registration_number or '')
 
     registration_number = fields.Char(
         required=True, index=True, copy=False,

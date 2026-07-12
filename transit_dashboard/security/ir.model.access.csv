@@ -1,5 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_transit_dashboard_fleet_manager,transit.dashboard.fleet_manager,model_transit_dashboard,transit_base.group_fleet_manager,1,1,1,1
-access_transit_dashboard_dispatcher,transit.dashboard.dispatcher,model_transit_dashboard,transit_base.group_driver,1,1,1,1
-access_transit_dashboard_safety_officer,transit.dashboard.safety_officer,model_transit_dashboard,transit_base.group_safety_officer,1,1,1,1
-access_transit_dashboard_financial_analyst,transit.dashboard.financial_analyst,model_transit_dashboard,transit_base.group_financial_analyst,1,1,1,1
+access_transit_dashboard_safety_officer,transit.dashboard.safety_officer,model_transit_dashboard,transit_base.group_safety_officer,1,0,0,0
+access_transit_dashboard_financial_analyst,transit.dashboard.financial_analyst,model_transit_dashboard,transit_base.group_financial_analyst,1,0,0,0

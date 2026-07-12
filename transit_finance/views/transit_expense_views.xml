@@ -8,13 +8,13 @@
                 <header>
                     <button name="action_approve" string="Approve" type="object"
                             class="oe_highlight" invisible="state != 'draft'"
-                            groups="transit_base.group_financial_analyst"/>
+                            groups="transit_base.group_financial_analyst,transit_base.group_fleet_manager"/>
                     <button name="action_reject" string="Reject" type="object"
                             invisible="state != 'draft'"
-                            groups="transit_base.group_financial_analyst"/>
+                            groups="transit_base.group_financial_analyst,transit_base.group_fleet_manager"/>
                     <button name="action_reset_draft" string="Reset to Draft" type="object"
                             invisible="state not in ('approved', 'rejected')"
-                            groups="transit_base.group_financial_analyst"/>
+                            groups="transit_base.group_financial_analyst,transit_base.group_fleet_manager"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,approved"/>
                 </header>
                 <sheet>

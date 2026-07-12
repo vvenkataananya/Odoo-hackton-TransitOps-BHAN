@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
+    <!-- Trips — visible to Fleet Manager + Driver + Financial Analyst -->
     <menuitem id="transit_trip_menu_root"
               name="Trips"
-              parent="transit_fleet.menu_transit_fleet"
-              sequence="20"/>
+              parent="transit_base.menu_transit_root"
+              sequence="40"
+              groups="transit_base.group_fleet_manager,transit_base.group_driver,transit_base.group_financial_analyst"/>
 
     <menuitem id="transit_trip_menu_all"
               name="All Trips"
               parent="transit_trip_menu_root"
               action="transit_trip_action"
-              sequence="10"/>
+              sequence="10"
+              groups="transit_base.group_fleet_manager,transit_base.group_driver"/>
 
     <menuitem id="transit_fuel_log_menu"
               name="Fuel Logs"
               parent="transit_trip_menu_root"
               action="transit_fuel_log_action"
-              sequence="20"/>
-
+              sequence="20"
+              groups="transit_base.group_fleet_manager,transit_base.group_driver,transit_base.group_financial_analyst"/>
 </odoo>

@@ -6,5 +6,5 @@
               parent="transit_base.menu_transit_root"
               action="transit_dashboard_action"
               sequence="5"
-              groups="transit_base.group_fleet_manager,transit_base.group_driver,transit_base.group_safety_officer,transit_base.group_financial_analyst"/>
+              groups="transit_base.group_fleet_manager,transit_base.group_financial_analyst"/>
 </odoo>

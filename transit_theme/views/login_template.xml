@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        TransitOps Login Page Template
+        Completely replaces Odoo's default login page with a dark two-panel design:
+        - Left panel: brand identity + role info
+        - Right panel: login form with RBAC role selector
+    -->
+    <template id="transitops_login" inherit_id="web.login" primary="True">
+        <xpath expr="//t[@t-call='web.layout']" position="replace">
+            <t t-call="web.layout">
+                <t t-set="head_login">
+                    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+                    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/>
+                </t>
+
+                <div class="transitops-login-wrapper">
+
+                    <!-- ═══════════ LEFT PANEL — Brand ═══════════ -->
+                    <div class="transitops-brand-panel">
+                        <!-- Logo + Brand -->
+                        <div class="transitops-brand-logo">
+                            <div class="transitops-logo-icon"></div>
+                            <h1 class="transitops-brand-name">TransitOps</h1>
+                            <p class="transitops-brand-tagline">Smart Transport Operations Platform</p>
+                        </div>
+
+                        <!-- Roles info -->
+                        <div class="transitops-roles-section">
+                            <p class="transitops-roles-title">One login, four roles:</p>
+                            <div class="transitops-role-item">
+                                <span class="transitops-role-dot"></span>
+                                Fleet Manager
+                            </div>
+                            <div class="transitops-role-item">
+                                <span class="transitops-role-dot"></span>
+                                Dispatcher
+                            </div>
+                            <div class="transitops-role-item">
+                                <span class="transitops-role-dot"></span>
+                                Safety Officer
+                            </div>
+                            <div class="transitops-role-item">
+                                <span class="transitops-role-dot"></span>
+                                Financial Analyst
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="transitops-brand-footer">
+                            TransitOps © 2026 · RBAC Enabled
+                        </div>
+                    </div>
+
+                    <!-- ═══════════ RIGHT PANEL — Form ═══════════ -->
+                    <div class="transitops-form-panel">
+                        <div class="transitops-form-inner">
+                            <h2 class="transitops-form-title">Sign in to your account</h2>
+                            <p class="transitops-form-subtitle">Enter your credentials to continue</p>
+
+                            <!-- Error alert -->
+                            <t t-if="error">
+                                <div class="transitops-alert" role="alert">
+                                    <t t-esc="error"/>
+                                </div>
+                            </t>
+
+                            <!-- Login Form -->
+                            <form action="/web/login" method="post" id="transitops_login_form">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                                <!-- Email -->
+                                <label class="transitops-field-label" for="login">Email</label>
+                                <input
+                                    type="text"
+                                    name="login"
+                                    id="login"
+                                    t-att-value="login"
+                                    placeholder="you@transitops.in"
+                                    required="required"
+                                    autofocus="autofocus"
+                                    autocomplete="username"
+                                    class="form-control"
+                                />
+
+                                <!-- Password -->
+                                <label class="transitops-field-label" for="password">Password</label>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    placeholder="••••••••"
+                                    required="required"
+                                    autocomplete="current-password"
+                                    class="form-control"
+                                />
+
+                                <!-- Role (RBAC) selector -->
+                                <label class="transitops-field-label" for="transitops_role">Role (RBAC)</label>
+                                <div class="transitops-select-wrapper">
+                                    <select name="transitops_role" id="transitops_role" class="form-control">
+                                        <option value="">— Select your role —</option>
+                                        <option value="group_fleet_manager"
+                                            t-att-selected="selected_role == 'group_fleet_manager' and 'selected' or None">
+                                            Fleet Manager
+                                        </option>
+                                        <option value="group_dispatcher"
+                                            t-att-selected="(selected_role == 'group_dispatcher' or not selected_role) and 'selected' or None">
+                                            Dispatcher
+                                        </option>
+                                        <option value="group_safety_officer"
+                                            t-att-selected="selected_role == 'group_safety_officer' and 'selected' or None">
+                                            Safety Officer
+                                        </option>
+                                        <option value="group_financial_analyst"
+                                            t-att-selected="selected_role == 'group_financial_analyst' and 'selected' or None">
+                                            Financial Analyst
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <!-- Remember me + Forgot -->
+                                <div class="transitops-remember-row">
+                                    <label class="transitops-remember-label">
+                                        <input type="checkbox" name="remember" id="remember"/>
+                                        Remember me
+                                    </label>
+                                    <a href="/web/reset_password" class="transitops-forgot-link">Forgot password?</a>
+                                </div>
+
+                                <!-- Sign In Button -->
+                                <button type="submit" class="transitops-signin-btn">
+                                    Sign In
+                                </button>
+
+                            </form>
+
+                            <!-- Access scope guide -->
+                            <div class="transitops-access-info">
+                                <p class="transitops-access-line" style="color:#555550; margin-bottom:8px; font-size:10px;">Access is scoped by role after login:</p>
+                                <p class="transitops-access-line">• <span>Fleet Manager</span> → Fleet, Maintenance</p>
+                                <p class="transitops-access-line">• <span>Dispatcher</span> → Dashboard, Trips</p>
+                                <p class="transitops-access-line">• <span>Safety Officer</span> → Drivers, Compliance</p>
+                                <p class="transitops-access-line">• <span>Financial Analyst</span> → Fuel &amp; Expenses, Analytics</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,362 @@
+/* ============================================================
+   TransitOps — Login Page Styles
+   Dark two-panel layout matching the TransitOps mockup
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── Reset & Page Base ─────────────────────────────────────── */
+body.o_login_page {
+    background: #111111 !important;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+}
+
+/* ── Outer wrapper: full viewport ──────────────────────────── */
+.transitops-login-wrapper {
+    display: flex;
+    width: 100vw;
+    min-height: 100vh;
+    background: #111111;
+}
+
+/* ── LEFT PANEL — Brand / Info Panel ──────────────────────── */
+.transitops-brand-panel {
+    width: 38%;
+    min-height: 100vh;
+    background: #e8e4d9;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 48px 44px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.transitops-brand-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.transitops-logo-icon {
+    width: 56px;
+    height: 56px;
+    background: #c8860a;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.transitops-logo-icon::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 4px;
+}
+
+.transitops-logo-icon::after {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.3) 0px,
+        rgba(255,255,255,0.3) 2px,
+        transparent 2px,
+        transparent 6px
+    );
+}
+
+.transitops-brand-name {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 26px;
+    font-weight: 400;
+    color: #1a1a1a;
+    letter-spacing: -0.5px;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.transitops-brand-tagline {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: #666660;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* Roles section */
+.transitops-roles-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.transitops-roles-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 15px;
+    color: #1a1a1a;
+    margin: 0 0 20px 0;
+    letter-spacing: 0.5px;
+}
+
+.transitops-role-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: #333330;
+}
+
+.transitops-role-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #c8860a;
+    flex-shrink: 0;
+}
+
+/* Footer */
+.transitops-brand-footer {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #999990;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ── RIGHT PANEL — Login Form ──────────────────────────────── */
+.transitops-form-panel {
+    flex: 1;
+    min-height: 100vh;
+    background: #111111;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 60px;
+    box-sizing: border-box;
+}
+
+.transitops-form-inner {
+    width: 100%;
+    max-width: 380px;
+}
+
+.transitops-form-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 24px;
+    color: #e8e4d9;
+    margin: 0 0 8px 0;
+    font-weight: 400;
+}
+
+.transitops-form-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #666660;
+    margin: 0 0 36px 0;
+}
+
+/* Form field labels */
+.transitops-field-label {
+    display: block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #888880;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    margin-top: 18px;
+}
+
+/* Form inputs */
+.transitops-form-inner .form-control,
+.transitops-form-inner input[type="text"],
+.transitops-form-inner input[type="email"],
+.transitops-form-inner input[type="password"],
+.transitops-form-inner select {
+    background: #1e1e1e !important;
+    border: 1px solid #2e2e2e !important;
+    border-radius: 6px !important;
+    color: #e8e4d9 !important;
+    font-family: 'Share Tech Mono', monospace !important;
+    font-size: 14px !important;
+    padding: 10px 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+    transition: border-color 0.2s ease !important;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.transitops-form-inner .form-control:focus,
+.transitops-form-inner input:focus,
+.transitops-form-inner select:focus {
+    border-color: #c8860a !important;
+    box-shadow: 0 0 0 2px rgba(200, 134, 10, 0.15) !important;
+    background: #222220 !important;
+}
+
+.transitops-form-inner input::placeholder {
+    color: #444440 !important;
+}
+
+/* Role select wrapper (for custom arrow) */
+.transitops-select-wrapper {
+    position: relative;
+}
+
+.transitops-select-wrapper::after {
+    content: '▾';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888880;
+    pointer-events: none;
+    font-size: 12px;
+}
+
+.transitops-select-wrapper select option {
+    background: #1e1e1e;
+    color: #e8e4d9;
+}
+
+/* Remember me row */
+.transitops-remember-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+
+.transitops-remember-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: #888880;
+    cursor: pointer;
+}
+
+.transitops-remember-label input[type="checkbox"] {
+    accent-color: #c8860a;
+    width: 14px;
+    height: 14px;
+}
+
+.transitops-forgot-link {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: #888880;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+}
+
+.transitops-forgot-link:hover {
+    color: #c8860a;
+}
+
+/* Sign In Button */
+.transitops-signin-btn {
+    width: 100%;
+    padding: 13px;
+    background: #c8860a;
+    border: none;
+    border-radius: 6px;
+    color: #111111;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+    text-transform: uppercase;
+}
+
+.transitops-signin-btn:hover {
+    background: #d9940b;
+    transform: translateY(-1px);
+}
+
+.transitops-signin-btn:active {
+    transform: translateY(0);
+    background: #b87509;
+}
+
+/* Access scope info */
+.transitops-access-info {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid #1e1e1e;
+}
+
+.transitops-access-line {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #444440;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+}
+
+.transitops-access-line span {
+    color: #666660;
+}
+
+/* Error alert styling */
+.transitops-alert {
+    background: #2a1a1a;
+    border: 1px solid #8b3333;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: #e06060;
+}
+
+.transitops-alert::before {
+    content: '✕ ';
+}
+
+/* Override Odoo's default o_login_form container */
+.o_login_form,
+#wrapwrap .o_login_form {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Hide Odoo default header/navbar on login */
+.o_main_navbar,
+header.o_top_menu {
+    display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .transitops-brand-panel {
+        display: none;
+    }
+    .transitops-form-panel {
+        padding: 32px 24px;
+    }
+}
