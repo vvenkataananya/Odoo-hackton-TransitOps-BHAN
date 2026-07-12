@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="transit_expense_form_view" model="ir.ui.view">
+        <field name="name">transit.expense.form</field>
+        <field name="model">transit.expense</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Expense Description"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Expense Details">
+                            <field name="vehicle_id"/>
+                            <field name="trip_id"/>
+                            <field name="expense_type"/>
+                            <field name="amount"/>
+                            <field name="date"/>
+                        </group>
+                        <group string="Payment">
+                            <field name="payment_method"/>
+                            <field name="reference"/>
+                            <field name="receipt" widget="binary"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Approval">
+                        <group>
+                            <field name="state"/>
+                            <field name="approved_by"/>
+                            <field name="approval_date"/>
+                        </group>
+                    </group>
+                    <separator string="Notes"/>
+                    <field name="note" placeholder="Additional notes..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="transit_expense_tree_view" model="ir.ui.view">
+        <field name="name">transit.expense.tree</field>
+        <field name="model">transit.expense</field>
+        <field name="arch" type="xml">
+            <list decoration-success="state == 'approved'"
+                  decoration-danger="state == 'rejected'"
+                  decoration-info="state == 'draft'">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="vehicle_id"/>
+                <field name="expense_type"/>
+                <field name="amount" sum="Total"/>
+                <field name="payment_method"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="transit_expense_search_view" model="ir.ui.view">
+        <field name="name">transit.expense.search</field>
+        <field name="model">transit.expense</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="vehicle_id"/>
+                <field name="reference"/>
+                <separator/>
+                <filter name="filter_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_approved" string="Approved" domain="[('state', '=', 'approved')]"/>
+                <filter name="filter_rejected" string="Rejected" domain="[('state', '=', 'rejected')]"/>
+                <separator/>
+                <group>
+                    <filter name="group_vehicle" string="Vehicle" context="{'group_by': 'vehicle_id'}"/>
+                    <filter name="group_expense_type" string="Expense Type" context="{'group_by': 'expense_type'}"/>
+                    <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
+                    <filter name="group_date" string="Date" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="transit_expense_action" model="ir.actions.act_window">
+        <field name="name">Expenses</field>
+        <field name="res_model">transit.expense</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="transit_expense_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first expense record.
+            </p>
+            <p>Track all your fleet expenses including fuel, tolls, maintenance, and more.</p>
+        </field>
+    </record>
+</odoo>

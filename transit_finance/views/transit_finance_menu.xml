@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="transit_finance_menu"
+              name="Finance"
+              parent="transit_trip.transit_trip_menu_root"
+              sequence="50"/>
+
+    <menuitem id="transit_expense_menu"
+              name="Expenses"
+              parent="transit_finance_menu"
+              action="transit_expense_action"
+              sequence="10"/>
+
+    <menuitem id="transit_report_menu"
+              name="Reports &amp; Analytics"
+              parent="transit_finance_menu"
+              action="transit_report_wizard_action"
+              sequence="20"/>
+</odoo>

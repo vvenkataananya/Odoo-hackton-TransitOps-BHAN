@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="transit_report_form_view" model="ir.ui.view">
+        <field name="name">transit.report.form</field>
+        <field name="model">transit.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>Report Generator</h1>
+                    </div>
+                    <group>
+                        <group string="Date Range">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group string="Filters">
+                            <field name="vehicle_id"/>
+                            <field name="vehicle_type_id"/>
+                            <field name="report_type"/>
+                        </group>
+                    </group>
+                    <separator string="Report Results"/>
+                    <field name="result_line_ids" readonly="1">
+                        <list editable="bottom">
+                            <field name="metric"/>
+                            <field name="label"/>
+                            <field name="vehicle_name"/>
+                            <field name="value"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="transit_report_wizard_action" model="ir.actions.act_window">
+        <field name="name">Reports &amp; Analytics</field>
+        <field name="res_model">transit.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="context">{'default_report_type': 'summary'}</field>
+    </record>
+</odoo>
